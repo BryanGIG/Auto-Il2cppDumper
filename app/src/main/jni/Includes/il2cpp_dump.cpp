@@ -22,6 +22,9 @@
 #undef DO_API
 
 static void *il2cpp_handle = nullptr;
+
+#include "BNMUtils.h"
+
 static uint64_t il2cpp_base = 0;
 
 void init_il2cpp_api() {
@@ -333,12 +336,11 @@ void il2cpp_dump(void *handle, char *outDir) {
     init_il2cpp_api();
     auto domain = il2cpp_domain_get();
     il2cpp_thread_attach(domain);
-    size_t size;
-    auto assemblies = il2cpp_domain_get_assemblies(domain, &size);
+    auto assemblies = Assembly$$GetAllAssemblies();
     uint32_t typeDefinitionsCount = 0;
     std::stringstream imageOutput;
-    for (int i = 0; i < size; ++i) {
-        auto image = il2cpp_assembly_get_image(assemblies[i]);
+    for (int i = 0; i < assemblies->size(); ++i) {
+        auto image = il2cpp_assembly_get_image((*assemblies)[i]);
         typeDefinitionsCount += image->typeCount;
 #ifdef VersionAbove2020V2
         imageOutput << "// Image " << i << ": " << image->name << " - "
@@ -353,8 +355,8 @@ void il2cpp_dump(void *handle, char *outDir) {
     LOGI("il2cpp_base: %" PRIx64"", il2cpp_base);
 #ifdef VersionAboveV24
     //使用il2cpp_image_get_class
-    for (int i = 0; i < size; ++i) {
-        auto image = il2cpp_assembly_get_image(assemblies[i]);
+    for (auto & assemblie : *assemblies) {
+        auto image = il2cpp_assembly_get_image(assemblie);
         auto classCount = il2cpp_image_get_class_count(image);
         for (int j = 0; j < classCount; ++j) {
             auto klass = il2cpp_image_get_class(image, j);

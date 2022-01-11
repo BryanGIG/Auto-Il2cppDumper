@@ -6,7 +6,7 @@
 #define RIRU_IL2CPPDUMPER_IL2CPP_H
 
 
-#define UnityVersion 2018.4.30f1
+#define UnityVersion 2019.4.17f1
 
 // 2018.3.0f2(v24.1) and up enable it
 #define VersionAboveV24
