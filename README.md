@@ -1,3 +1,6 @@
+# THERE WILL BE NO FUTURE UPDATE IN THIS REPO
+Please go to [Auto-Il2CppDumper](https://github.com/AndnixSH/Auto-Il2cppDumper) by [AdnixSH](https://github.com/AndnixSH) for future update
+
 # Auto-Il2cppDumper
 This is for helping you get dump.cs from Android Il2cpp game
 
